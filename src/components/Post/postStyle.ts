@@ -1,17 +1,21 @@
 import { StyleSheet } from 'react-native';
-
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    marginBottom: 15,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
     height: 200,
   },
-  textWrapp: {
-    padding: 10,
+  content: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingVertical: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  textContent: {
+  title: {
+    color: '#fff',
     fontFamily: 'inconsolata',
   },
 });
