@@ -3,4 +3,5 @@ export interface Data {
   img: string;
   text: string;
   date: string;
+  booked: boolean;
 }

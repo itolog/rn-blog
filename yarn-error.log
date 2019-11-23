@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-navigation-stack
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-navigation-tabs
 
 PATH: 
-  C:\Program Files\ConEmu\ConEmu\Scripts;C:\Program Files\ConEmu;C:\Program Files\ConEmu\ConEmu;C:\Python38\Scripts\;C:\Python38\;C:\Python27\;C:\Python27\Scripts;C:\Python37\Scripts\;C:\Python37\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-12.0.2\;C:\Users\itolog\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Android\android-sdk\tools\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\dotnet\;C:\Users\itolog\AppData\Local\Microsoft\WindowsApps;C:\Users\itolog\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\WebStorm 2019.2.4\bin;C:\Users\itolog\AppData\Roaming\npm;C:\Program Files\JetBrains\JetBrains Rider 2019.2.3\bin;C:\Program Files\JetBrains\PyCharm 2019.2.4\bin;C:\Users\itolog\AppData\Local\Yarn\bin
+  C:\Python38\Scripts\;C:\Python38\;C:\Python27\;C:\Python27\Scripts;C:\Python37\Scripts\;C:\Python37\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-12.0.2\;C:\Users\itolog\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Android\android-sdk\tools\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\dotnet\;C:\Users\itolog\AppData\Local\Microsoft\WindowsApps;C:\Users\itolog\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\WebStorm 2019.2.4\bin;;C:\Users\itolog\AppData\Roaming\npm;C:\Program Files\JetBrains\JetBrains Rider 2019.2.3\bin;;C:\Program Files\JetBrains\PyCharm 2019.2.4\bin;;C:\Users\itolog\AppData\Local\Yarn\bin
 
 Yarn version: 
   1.19.1
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\IT\expo\blog\node_modules\@babel\generator\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\IT\expo\blog\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
 
 npm manifest: 
   {
@@ -36,7 +36,9 @@ npm manifest:
       "react-native-reanimated": "~1.2.0",
       "react-native-screens": "~1.0.0-alpha.23",
       "react-native-web": "^0.11.7",
-      "react-navigation": "^4.0.10"
+      "react-navigation": "^4.0.10",
+      "react-navigation-header-buttons": "^3.0.4",
+      "react-navigation-stack": "^1.10.3"
     },
     "devDependencies": {
       "@react-native-community/eslint-config": "^0.0.5",

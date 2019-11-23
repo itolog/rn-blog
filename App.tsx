@@ -3,12 +3,12 @@ import { Text } from 'react-native';
 import { AppLoading } from 'expo';
 
 import { useScreens } from 'react-native-screens';
-useScreens();
 
 import bootstrap from './src/shared/bootstrap';
 
-import AppNavigation from './src/navigation/AppNavigation';
+import { AppNavigation } from './src/navigation/AppNavigation';
 
+useScreens();
 export default function App() {
   const [isReady, setIsready] = useState(false);
   const [errLoading, setErrLoading] = useState<string>('');
