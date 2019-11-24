@@ -1,5 +1,4 @@
 import React from 'react';
-import { FlatList } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenComponent,
@@ -12,15 +11,11 @@ import styles from './mainScreenStyle';
 import { Data } from '../../shared/interfaces/data';
 import { DATA } from '../../shared/data';
 
-import Post from '../../components/Post/Post';
+import PostList from '../../shared/components/PostList/PostList';
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
 
 interface Props {
   navigation: NavigationStackProp;
-}
-
-interface IData {
-  item: Data;
 }
 
 const MainScreen: NavigationStackScreenComponent<{}, Props> = ({
@@ -36,26 +31,19 @@ const MainScreen: NavigationStackScreenComponent<{}, Props> = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        style={styles.wrappList}
-        data={DATA}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }: IData) => {
-          return <Post item={item} onOpen={handleOpenPost} />;
-        }}
-      />
+      <PostList dataProps={DATA} onOpen={handleOpenPost} />
     </SafeAreaView>
   );
 };
 
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Блог',
   headerRight: (
     <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
       <Item
         iconName='ios-camera'
         title='take photo'
-        onPress={() => console.log('select')}
+        onPress={() => navigation.push('Create')}
       />
     </HeaderButtons>
   ),
@@ -64,10 +52,10 @@ MainScreen.navigationOptions = {
       <Item
         iconName='ios-menu'
         title='drawer menu'
-        onPress={() => console.log('select')}
+        onPress={navigation.openDrawer}
       />
     </HeaderButtons>
   ),
-};
+});
 
 export default MainScreen;

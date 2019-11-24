@@ -2,6 +2,8 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -10,20 +12,24 @@ import { THEME } from '../shared/variables/theme';
 import MainScreen from '../screens/MainScreen/MainScreen';
 import PostScreen from '../screens/PostScreen/PostScreen';
 import BookedScreen from './../screens/BookedScreen/BookedScreen';
+import AboutScreen from './../screens/AboutScreen/AboutScreen';
+import CreateScreen from './../screens/CreateScreen/CreateScreen';
+
+const navigatorOptions = {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white',
+    },
+    headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR,
+  },
+};
 
 const BookedNavigator = createStackNavigator(
   {
     Booked: BookedScreen,
     Post: PostScreen,
   },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white',
-      },
-      headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR,
-    },
-  },
+  navigatorOptions,
 );
 
 const PostNavigator = createStackNavigator(
@@ -31,41 +37,88 @@ const PostNavigator = createStackNavigator(
     Main: MainScreen,
     Post: PostScreen,
   },
-  {
-    initialRouteName: 'Main',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : 'white',
-      },
-      headerTintColor: Platform.OS === 'android' ? 'white' : THEME.MAIN_COLOR,
-    },
-  },
+  navigatorOptions,
 );
 
-const BottomNavigator = createBottomTabNavigator(
+const bottomConfig = {
+  Post: {
+    screen: PostNavigator,
+    navigationOptions: {
+      tabBarLabel: 'все',
+      tabBarIcon: (info: any) => (
+        <Ionicons name='ios-albums' size={25} color={info.tintColor} />
+      ),
+    },
+  },
+  Booked: {
+    screen: BookedNavigator,
+    navigationOptions: {
+      tabBarLabel: 'избранное',
+      tabBarIcon: (info: any) => (
+        <Ionicons name='ios-star' size={25} color={info.tintColor} />
+      ),
+    },
+  },
+};
+
+const BottomNavigator =
+  Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(bottomConfig, {
+        activeColor: '#fff',
+        shifting: true,
+        barStyle: {
+          backgroundColor: THEME.MAIN_COLOR,
+        },
+      })
+    : createBottomTabNavigator(bottomConfig, {
+        tabBarOptions: {
+          activeTintColor: THEME.MAIN_COLOR,
+        },
+      });
+
+const AboutNavigator = createStackNavigator(
   {
-    Post: {
-      screen: PostNavigator,
+    About: AboutScreen,
+  },
+  navigatorOptions,
+);
+
+const Createnavigator = createStackNavigator(
+  {
+    Create: CreateScreen,
+  },
+  navigatorOptions,
+);
+
+const MainNavigator = createDrawerNavigator(
+  {
+    PostScreen: {
+      screen: BottomNavigator,
       navigationOptions: {
-        tabBarIcon: info => (
-          <Ionicons name='ios-albums' size={25} color={info.tintColor} />
-        ),
+        drawerLabel: 'Главная',
       },
     },
-    Booked: {
-      screen: BookedNavigator,
+    AboutScreen: {
+      screen: AboutNavigator,
       navigationOptions: {
-        tabBarIcon: info => (
-          <Ionicons name='ios-star' size={25} color={info.tintColor} />
-        ),
+        drawerLabel: 'О приложении',
+      },
+    },
+    CreateScreen: {
+      screen: Createnavigator,
+      navigationOptions: {
+        drawerLabel: 'Создать пост',
       },
     },
   },
   {
-    tabBarOptions: {
+    contentOptions: {
       activeTintColor: THEME.MAIN_COLOR,
+      labelStyle: {
+        fontFamily: 'inconsolata-bold',
+      },
     },
   },
 );
 
-export const AppNavigation = createAppContainer(BottomNavigator);
+export const AppNavigation = createAppContainer(MainNavigator);
