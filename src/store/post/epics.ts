@@ -27,4 +27,13 @@ const toogleBookedEpic: Epic = action$ =>
     catchError(() => of(Actions.toggleBookedFailure('toogle booked failure'))),
   );
 
-export const epics = [loadPostsEpic, toogleBookedEpic];
+const removePostsEpic: Epic = action$ =>
+  action$.pipe(
+    ofType(ActionTypes.REMOVE_POST),
+    switchMap(({ payload }) => {
+      return of(Actions.removePostSuccess(payload));
+    }),
+    catchError(() => of(Actions.removePostFailure('remove posts failure'))),
+  );
+
+export const epics = [loadPostsEpic, toogleBookedEpic, removePostsEpic];

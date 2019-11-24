@@ -11,6 +11,10 @@ export enum ActionTypes {
   TOOGLE_BOOKED = 'TOOGLE_BOOKED',
   TOOGLE_BOOKED_SUCCESE = 'TOOGLE_BOOKED_SUCCESE',
   TOOGLE_BOOKED_FAILURE = 'TOOGLE_BOOKED_FAILURE',
+
+  REMOVE_POST = 'REMOVE_POST',
+  REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS',
+  REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE',
 }
 
 export const Actions = {
@@ -27,6 +31,12 @@ export const Actions = {
     action(ActionTypes.TOOGLE_BOOKED_SUCCESE, payload),
   toggleBookedFailure: (error: string) =>
     action(ActionTypes.TOOGLE_BOOKED_FAILURE, error),
+
+  removePost: (payload: string) => action(ActionTypes.REMOVE_POST, payload),
+  removePostSuccess: (payload: string) =>
+    action(ActionTypes.REMOVE_POST_SUCCESS, payload),
+  removePostFailure: (error: string) =>
+    action(ActionTypes.REMOVE_POST_FAILURE, error),
 };
 
 export type ActionTypeUnion = ActionType<typeof Actions>;

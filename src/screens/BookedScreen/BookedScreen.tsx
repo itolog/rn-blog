@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -37,7 +37,11 @@ const BookedScreen = ({ navigation, bookedPosts }: Props) => {
   };
 
   if (bookedPosts.length === 0) {
-    return <ActivityIndicator size='large' color='#0000ff' />;
+    return (
+      <View style={styles.emptyBooked}>
+        <Text style={styles.emptyBookedText}>Избранного нету</Text>
+      </View>
+    );
   }
 
   return (

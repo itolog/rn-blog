@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import {ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import {
-  NavigationStackProp,
-} from 'react-navigation-stack';
+import { NavigationStackProp } from 'react-navigation-stack';
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -15,6 +12,7 @@ import { Data } from '../../shared/interfaces/data';
 
 import PostList from '../../shared/components/PostList/PostList';
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
+import Loader from '../../shared/UI/Loader/Loader';
 
 // STORE IMPORTS
 import { AppState } from '../../store';
@@ -51,8 +49,8 @@ const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
     loadPosts();
   }, []);
 
-  if(allPosts.length === 0) {
-    return  <ActivityIndicator size="large" color="#0000ff" />
+  if (allPosts.length === 0) {
+    return <Loader />;
   }
   return (
     <SafeAreaView style={styles.container}>

@@ -27,16 +27,31 @@ export function reducer(
     }
     case ActionTypes.TOOGLE_BOOKED_SUCCESE: {
       const allPosts = state.allPosts.map(post => {
-        if(post.id === action.payload) {
-          post.booked = !post.booked
+        if (post.id === action.payload) {
+          post.booked = !post.booked;
         }
-        return post
-      })
+        return post;
+      });
       return {
         ...state,
         allPosts,
         bookedPosts: allPosts.filter(p => p.booked),
-      }
+      };
+    }
+    case ActionTypes.REMOVE_POST_SUCCESS: {
+      return {
+        ...state,
+        allPosts: state.allPosts.filter(post => post.id !== action.payload),
+        bookedPosts: state.bookedPosts.filter(
+          post => post.id !== action.payload,
+        ),
+      };
+    }
+    case ActionTypes.REMOVE_POST_FAILURE: {
+      return {
+        ...state,
+        error: action.payload,
+      };
     }
     default: {
       return state;
