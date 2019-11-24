@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {ActivityIndicator } from 'react-native'
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import {
   NavigationStackProp,
-  NavigationStackScreenComponent,
 } from 'react-navigation-stack';
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -9,18 +12,33 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import styles from './mainScreenStyle';
 
 import { Data } from '../../shared/interfaces/data';
-import { DATA } from '../../shared/data';
 
 import PostList from '../../shared/components/PostList/PostList';
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
 
-interface Props {
+// STORE IMPORTS
+import { AppState } from '../../store';
+import { Actions } from '../../store/post/actions';
+import { getAllPosts } from '../../store/post/selectors';
+// STORE PROPS
+const mapStateToProps = (state: AppState) => {
+  return {
+    allPosts: getAllPosts(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  loadPosts: () => dispatch(Actions.getPosts()),
+});
+
+interface IProps {
   navigation: NavigationStackProp;
 }
+type Props = ReturnType<typeof mapDispatchToProps> &
+  ReturnType<typeof mapStateToProps> &
+  IProps;
 
-const MainScreen: NavigationStackScreenComponent<{}, Props> = ({
-  navigation,
-}) => {
+const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
   const handleOpenPost = (post: Data) => {
     navigation.navigate('Post', {
       postId: post.id,
@@ -29,14 +47,21 @@ const MainScreen: NavigationStackScreenComponent<{}, Props> = ({
     });
   };
 
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  if(allPosts.length === 0) {
+    return  <ActivityIndicator size="large" color="#0000ff" />
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <PostList dataProps={DATA} onOpen={handleOpenPost} />
+      <PostList dataProps={allPosts} onOpen={handleOpenPost} />
     </SafeAreaView>
   );
 };
 
-MainScreen.navigationOptions = ({ navigation }) => ({
+MainScreen.navigationOptions = ({ navigation }: Props) => ({
   headerTitle: 'Блог',
   headerRight: (
     <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
@@ -58,4 +83,4 @@ MainScreen.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-export default MainScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

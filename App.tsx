@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import { AppLoading } from 'expo';
+import { Provider } from 'react-redux';
 
 import { useScreens } from 'react-native-screens';
+
+import { rootStore } from './src/store';
 
 import bootstrap from './src/shared/bootstrap';
 
@@ -27,5 +30,9 @@ export default function App() {
     return <Text>{errLoading}</Text>;
   }
 
-  return <AppNavigation />;
+  return (
+    <Provider store={rootStore}>
+      <AppNavigation />
+    </Provider>
+  );
 }
