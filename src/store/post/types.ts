@@ -1,4 +1,4 @@
-import { Data } from './../../shared/interfaces/data';
+import { Data } from '../../shared/interfaces/data';
 
 export interface PostState {
   allPosts: Data[];

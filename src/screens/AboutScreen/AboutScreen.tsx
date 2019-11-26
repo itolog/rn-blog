@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenComponent,
 } from 'react-navigation-stack';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 

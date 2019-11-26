@@ -1,8 +1,10 @@
 import { action, ActionType } from 'typesafe-actions';
-import { Data } from './../../shared/interfaces/data';
+import { Data } from '../../shared/interfaces/data';
 
 export enum ActionTypes {
   ADD_POST = 'ADD_POST',
+  ADD_POST_SUCCESS = 'ADD_POST_SUCCESS',
+  ADD_POST_FAILURE = 'ADD_POST_FAILURE',
 
   GET_POSTS = 'GET_POSTS',
   GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS',
@@ -19,6 +21,9 @@ export enum ActionTypes {
 
 export const Actions = {
   addPost: (payload: Data) => action(ActionTypes.ADD_POST, payload),
+  addPostSuccess: (payload: Data) =>
+    action(ActionTypes.ADD_POST_SUCCESS, payload),
+  addPostFailure: (error: string) => action(ActionTypes.ADD_POST_FAILURE, error),
 
   getPosts: () => action(ActionTypes.GET_POSTS),
   getPostsSuccess: (payload: Data[]) =>

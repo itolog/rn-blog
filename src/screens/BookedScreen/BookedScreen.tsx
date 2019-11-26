@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 

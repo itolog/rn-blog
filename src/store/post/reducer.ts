@@ -25,6 +25,12 @@ export function reducer(
         error: action.payload,
       };
     }
+    case ActionTypes.ADD_POST_SUCCESS: {
+      return {
+        ...state,
+        allPosts: [{ ...action.payload }, ...state.allPosts],
+      };
+    }
     case ActionTypes.TOOGLE_BOOKED_SUCCESE: {
       const allPosts = state.allPosts.map(post => {
         if (post.id === action.payload) {

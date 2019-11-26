@@ -10,6 +10,8 @@
   "dependencies": {
     "expo": "^35.0.0",
     "expo-font": "~7.0.0",
+    "expo-image-picker": "~7.0.0",
+    "expo-permissions": "~7.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
@@ -32,14 +34,14 @@
     "typesafe-actions": "^5.1.0"
   },
   "devDependencies": {
-    "@react-native-community/eslint-config": "^0.0.5",
-    "@types/react": "^16.8.23",
+    "@react-native-community/eslint-config": "0.0.5",
+    "@types/react": "^16.9.13",
     "@types/react-native": "^0.57.65",
     "@types/react-redux": "^7.1.5",
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
     "babel-preset-expo": "^7.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-typescript": "^6.3.0",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-typescript": "^6.3.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",

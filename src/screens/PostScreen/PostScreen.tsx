@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { View, Text, Image, Button, ScrollView, Alert } from 'react-native';
 import { NavigationStackProp } from 'react-navigation-stack';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import styles from './postScreenStyle';
-import { THEME } from './../../shared/variables/theme';
+import { THEME } from '../../shared/variables/theme';
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
 import Loader from '../../shared/UI/Loader/Loader';
 
@@ -53,7 +54,7 @@ const PostScreen = ({
 
   const [post, setPost] = useState();
 
-  const booked = bookedPosts.some(post => post.id === postId);
+  const booked = bookedPosts.some(p => p.id === postId);
 
   const handlerRemove = () => {
     Alert.alert(
@@ -85,16 +86,15 @@ const PostScreen = ({
   useEffect(() => {
     const getPostById = allPosts.find(p => p.id === postId);
     setPost(getPostById);
-  }, [allPosts]);
+  }, [postId]);
 
   const handleToogler = useCallback(() => {
-    console.log(postId);
     toogleBooked(postId);
-  }, [toogleBooked, postId]);
+  }, [postId]);
 
   useEffect(() => {
     navigation.setParams({ handleToogler });
-  }, []);
+  }, [handleToogler]);
 
   if (!post) {
     return <Loader />;
@@ -134,4 +134,7 @@ PostScreen.navigationOptions = ({ navigation }: Props) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PostScreen);

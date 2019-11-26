@@ -13,6 +13,8 @@ module.exports = {
   },
   rules: {
     "react-hooks/rules-of-hooks": "error",
+    "no-param-reassign": 0,
+    "import/prefer-default-export": "off",
     "react-hooks/exhaustive-deps": "warn",
     "jsx-quotes": ["error", "prefer-single"],
     "import/no-unresolved": [

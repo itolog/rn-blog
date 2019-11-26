@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { NavigationStackProp } from 'react-navigation-stack';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -47,7 +48,7 @@ const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [loadPosts]);
 
   if (allPosts.length === 0) {
     return <Loader />;
@@ -81,4 +82,7 @@ MainScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MainScreen);
