@@ -1,24 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import Post from '../../../components/Post/Post';
-import { Data } from './../../interfaces/data';
-
-interface Props {
-  dataProps: Data[];
-  onOpen: (post: Data) => void;
-}
-
-const PostList: React.FC<Props> = ({ dataProps, onOpen }) => {
-  return (
-    <View style={styles.wrapper}>
-      <FlatList
-        data={dataProps}
-        keyExtractor={(post: Data) => post.id}
-        renderItem={({ item }) => <Post item={item} onOpen={onOpen} />}
-      />
-    </View>
-  );
-};
+import { DataDB } from '../../interfaces/data';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -26,5 +9,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+interface Props {
+  dataProps: DataDB[];
+  onOpen: (post: DataDB) => void;
+}
+
+const PostList: React.FC<Props> = ({ dataProps, onOpen }) => {
+  return (
+    <View style={styles.wrapper}>
+      <FlatList
+        data={dataProps}
+        keyExtractor={(post: any) => post.id.toString()}
+        renderItem={({ item }) => <Post item={item} onOpen={onOpen} />}
+      />
+    </View>
+  );
+};
 
 export default PostList;

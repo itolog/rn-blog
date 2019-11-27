@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { NavigationStackProp } from 'react-navigation-stack';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import styles from './mainScreenStyle';
 
-import { Data } from '../../shared/interfaces/data';
+import { DataDB } from '../../shared/interfaces/data';
 
 import PostList from '../../shared/components/PostList/PostList';
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
-import Loader from '../../shared/UI/Loader/Loader';
+import EmptyPost from '../../shared/components/EmptyPost/EmptyPost';
 
 // STORE IMPORTS
 import { AppState } from '../../store';
@@ -33,12 +32,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 interface IProps {
   navigation: NavigationStackProp;
 }
+
 type Props = ReturnType<typeof mapDispatchToProps> &
   ReturnType<typeof mapStateToProps> &
   IProps;
 
 const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
-  const handleOpenPost = (post: Data) => {
+  const handleOpenPost = (post: DataDB) => {
     navigation.navigate('Post', {
       postId: post.id,
       postDate: post.date,
@@ -48,10 +48,10 @@ const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
 
   useEffect(() => {
     loadPosts();
-  }, [loadPosts]);
+  }, []);
 
   if (allPosts.length === 0) {
-    return <Loader />;
+    return <EmptyPost title='Постов нету' />;
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -82,7 +82,4 @@ MainScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MainScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

@@ -1,5 +1,5 @@
 import { action, ActionType } from 'typesafe-actions';
-import { Data } from '../../shared/interfaces/data';
+import { DataDB, DTOProps } from '../../shared/interfaces/data';
 
 export enum ActionTypes {
   ADD_POST = 'ADD_POST',
@@ -20,13 +20,14 @@ export enum ActionTypes {
 }
 
 export const Actions = {
-  addPost: (payload: Data) => action(ActionTypes.ADD_POST, payload),
-  addPostSuccess: (payload: Data) =>
+  addPost: (payload: DTOProps) => action(ActionTypes.ADD_POST, payload),
+  addPostSuccess: (payload: DataDB) =>
     action(ActionTypes.ADD_POST_SUCCESS, payload),
-  addPostFailure: (error: string) => action(ActionTypes.ADD_POST_FAILURE, error),
+  addPostFailure: (error: string) =>
+    action(ActionTypes.ADD_POST_FAILURE, error),
 
   getPosts: () => action(ActionTypes.GET_POSTS),
-  getPostsSuccess: (payload: Data[]) =>
+  getPostsSuccess: (payload: DataDB[]) =>
     action(ActionTypes.GET_POSTS_SUCCESS, payload),
   getPostsFailure: (error: string) =>
     action(ActionTypes.GET_POSTS_FAILURE, error),

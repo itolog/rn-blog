@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -16,6 +15,7 @@ import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
 // STORE IMPORTS
 import { AppState } from '../../store';
 import { getBookedPosts } from '../../store/post/selectors';
+import EmptyPost from '../../shared/components/EmptyPost/EmptyPost';
 // STORE PROPS
 const mapStateToProps = (state: AppState) => {
   return {
@@ -38,13 +38,8 @@ const BookedScreen = ({ navigation, bookedPosts }: Props) => {
   };
 
   if (bookedPosts.length === 0) {
-    return (
-      <View style={styles.emptyBooked}>
-        <Text style={styles.emptyBookedText}>Избранного нету</Text>
-      </View>
-    );
+    return <EmptyPost title='Избранного нету' />;
   }
-
   return (
     <SafeAreaView style={styles.container}>
       <PostList dataProps={bookedPosts} onOpen={handleOpenPost} />

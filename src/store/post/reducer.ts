@@ -28,7 +28,7 @@ export function reducer(
     case ActionTypes.ADD_POST_SUCCESS: {
       return {
         ...state,
-        allPosts: [{ ...action.payload }, ...state.allPosts],
+        allPosts: [...state.allPosts, action.payload],
       };
     }
     case ActionTypes.TOOGLE_BOOKED_SUCCESE: {

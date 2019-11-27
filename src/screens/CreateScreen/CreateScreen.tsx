@@ -9,7 +9,6 @@ import {
   Keyboard,
 } from 'react-native';
 import { NavigationStackProp } from 'react-navigation-stack';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -18,12 +17,12 @@ import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
 
 // STORE IMPORTS
 import { Actions } from '../../store/post/actions';
-import { Data } from '../../shared/interfaces/data';
+import { DTOProps } from '../../shared/interfaces/data';
 import PhotoPicker from '../../components/PhotoPicker/PhotoPicker';
 // STORE PROPS
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addPost: (payload: Data) => dispatch(Actions.addPost(payload)),
+  addPost: (payload: DTOProps) => dispatch(Actions.addPost(payload)),
 });
 
 interface IProps {
@@ -37,9 +36,7 @@ const CreateScreen = ({ addPost, navigation }: Props) => {
   const [imagePick, setImagePick] = useState('');
 
   const handleSavePost = () => {
-    const id = `as${Date().toString()}`;
-    const post: Data = {
-      id,
+    const post: DTOProps = {
       date: new Date().toJSON(),
       img: imagePick,
       text: postText,
@@ -85,7 +82,4 @@ CreateScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(CreateScreen);
+export default connect(null, mapDispatchToProps)(CreateScreen);

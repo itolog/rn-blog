@@ -12,6 +12,7 @@
     "expo-font": "~7.0.0",
     "expo-image-picker": "~7.0.0",
     "expo-permissions": "~7.0.0",
+    "expo-sqlite": "~7.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
@@ -31,7 +32,8 @@
     "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.3",
-    "typesafe-actions": "^5.1.0"
+    "typesafe-actions": "^5.1.0",
+    "expo-file-system": "~7.0.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "0.0.5",
@@ -48,7 +50,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "redux-devtools-extension": "^2.13.8",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.2"
   },
   "private": true
 }

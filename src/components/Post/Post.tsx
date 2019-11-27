@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-import { Data } from '../../shared/interfaces/data';
+import { DataDB } from '../../shared/interfaces/data';
 
 import styles from './postStyle';
 
 interface Props {
-  item: Data;
-  onOpen: (post: Data) => void;
+  item: DataDB;
+  onOpen: (post: DataDB) => void;
 }
 
 const Post: React.FC<Props> = ({ item, onOpen }) => {
