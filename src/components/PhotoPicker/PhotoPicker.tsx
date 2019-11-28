@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Image, View, StyleSheet, Alert } from 'react-native';
+import { Button, Image, View, StyleSheet, Alert, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
 });
 
 async function getPermissionAsync() {
-  const { status } = await Permissions.askAsync(
-    Permissions.CAMERA,
-    Permissions.CAMERA_ROLL,
-  );
-  if (status !== 'granted') {
-    Alert.alert('Ошибка.', 'Нет прав на создания фото');
-    return false;
+  if (Platform.OS === 'ios') {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status !== 'granted') {
+      Alert.alert('Ошибка.', 'Нет прав на создания фото');
+      return false;
+    }
   }
+
   return true;
 }
 

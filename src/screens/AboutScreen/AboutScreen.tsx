@@ -1,14 +1,20 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, SafeAreaView, StyleSheet } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenComponent,
 } from 'react-navigation-stack';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import AppHeaderIcon from '../../components/AppHeaderIcon/AppHeaderIcon';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 interface Props {
   navigation: NavigationStackProp;
@@ -16,8 +22,8 @@ interface Props {
 
 const AboutScreen: NavigationStackScreenComponent<{}, Props> = () => {
   return (
-    <SafeAreaView>
-      <Text>AboutScreen</Text>
+    <SafeAreaView style={styles.container}>
+      <Text>Версия приложении 1.0.2</Text>
     </SafeAreaView>
   );
 };

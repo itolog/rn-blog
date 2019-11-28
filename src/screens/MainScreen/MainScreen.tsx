@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { SafeAreaView } from 'react-native';
 
 import { NavigationStackProp } from 'react-navigation-stack';
-import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import styles from './mainScreenStyle';
@@ -86,7 +86,4 @@ MainScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MainScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

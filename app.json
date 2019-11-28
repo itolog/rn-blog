@@ -25,15 +25,17 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.itologjs.yo-blog",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "package": "com.itologjs.yo_blog",
-      "versionCode": 1,
+      "versionCode": 3,
       "permissions": [
         "CAMERA",
         "READ_EXTERNAL_STORAGE"
       ]
-    }
+    },
+    "description": "simple blog React Native",
+    "githubUrl": "https://github.com/itolog/rn-blog"
   }
 }

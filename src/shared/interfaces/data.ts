@@ -2,7 +2,7 @@ export interface DTOProps {
   img: string;
   text: string;
   date: string;
-  booked: boolean;
+  booked: number | boolean;
 }
 
 export interface DataDB {
@@ -10,5 +10,5 @@ export interface DataDB {
   img: string;
   text: string;
   date: string;
-  booked: boolean;
+  booked: boolean | number;
 }

@@ -17,7 +17,7 @@ export function reducer(
       return {
         ...state,
         allPosts: action.payload,
-        bookedPosts: action.payload.filter(p => Boolean(p.booked)),
+        bookedPosts: action.payload.filter(p => p.booked),
         loading: false,
       };
     }

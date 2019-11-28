@@ -94,12 +94,12 @@ class DbService {
           [id],
           () => resolve(id),
           (_: SQLTransaction, error: SQLError) => {
-            reject(error)
+            reject(error);
             return false;
           },
         );
       });
-    })
+    });
   }
 }
 

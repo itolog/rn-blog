@@ -7,9 +7,9 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  SafeAreaView,
 } from 'react-native';
 import { NavigationStackProp } from 'react-navigation-stack';
-import SafeAreaView from 'react-native-safe-area-view';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import styles from './createSrtyles';
@@ -40,7 +40,7 @@ const CreateScreen = ({ addPost, navigation }: Props) => {
       date: new Date().toJSON(),
       img: imagePick,
       text: postText,
-      booked: false,
+      booked: 0,
     };
     addPost(post);
     navigation.navigate('Main');
@@ -82,7 +82,4 @@ CreateScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(CreateScreen);
+export default connect(null, mapDispatchToProps)(CreateScreen);
