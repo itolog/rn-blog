@@ -82,4 +82,7 @@ CreateScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(null, mapDispatchToProps)(CreateScreen);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(CreateScreen);

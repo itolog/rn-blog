@@ -5,6 +5,7 @@ const initialState: PostState = {
   allPosts: [],
   bookedPosts: [],
   error: null,
+  loading: true,
 };
 
 export function reducer(
@@ -16,7 +17,8 @@ export function reducer(
       return {
         ...state,
         allPosts: action.payload,
-        bookedPosts: action.payload.filter(p => p.booked),
+        bookedPosts: action.payload.filter(p => Boolean(p.booked)),
+        loading: false,
       };
     }
     case ActionTypes.GET_POSTS_FAILURE: {
@@ -28,7 +30,7 @@ export function reducer(
     case ActionTypes.ADD_POST_SUCCESS: {
       return {
         ...state,
-        allPosts: [...state.allPosts, action.payload],
+        allPosts: [action.payload, ...state.allPosts],
       };
     }
     case ActionTypes.TOOGLE_BOOKED_SUCCESE: {

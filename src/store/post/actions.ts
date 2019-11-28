@@ -32,14 +32,14 @@ export const Actions = {
   getPostsFailure: (error: string) =>
     action(ActionTypes.GET_POSTS_FAILURE, error),
 
-  toggleBooked: (payload: string) => action(ActionTypes.TOOGLE_BOOKED, payload),
-  toggleBookedSuccess: (payload: string) =>
+  toggleBooked: (payload: DataDB) => action(ActionTypes.TOOGLE_BOOKED, payload),
+  toggleBookedSuccess: (payload: number | unknown) =>
     action(ActionTypes.TOOGLE_BOOKED_SUCCESE, payload),
   toggleBookedFailure: (error: string) =>
     action(ActionTypes.TOOGLE_BOOKED_FAILURE, error),
 
   removePost: (payload: string) => action(ActionTypes.REMOVE_POST, payload),
-  removePostSuccess: (payload: string) =>
+  removePostSuccess: (payload: number | unknown) =>
     action(ActionTypes.REMOVE_POST_SUCCESS, payload),
   removePostFailure: (error: string) =>
     action(ActionTypes.REMOVE_POST_FAILURE, error),

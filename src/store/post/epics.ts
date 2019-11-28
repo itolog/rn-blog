@@ -15,9 +15,7 @@ const loadPostsEpic: Epic = action$ =>
       const data = await DbService.getPosts();
       return data;
     }),
-    switchMap((data: any) => {
-      return of(Actions.getPostsSuccess(data));
-    }),
+    switchMap((data: any) => of(Actions.getPostsSuccess(data))),
     catchError(() => of(Actions.getPostsFailure('load posts failure'))),
   );
 
@@ -48,8 +46,12 @@ const addPostsEpic: Epic = action$ =>
 const toogleBookedEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.TOOGLE_BOOKED),
-    switchMap(({ payload }) => {
-      return of(Actions.toggleBookedSuccess(payload));
+    switchMap(async ({ payload }) => {
+      const id = await DbService.updatePostBooked(payload);
+      return id;
+    }),
+    switchMap(id => {
+      return of(Actions.toggleBookedSuccess(id));
     }),
     catchError(() => of(Actions.toggleBookedFailure('toogle booked failure'))),
   );
@@ -57,9 +59,11 @@ const toogleBookedEpic: Epic = action$ =>
 const removePostsEpic: Epic = action$ =>
   action$.pipe(
     ofType(ActionTypes.REMOVE_POST),
-    switchMap(({ payload }) => {
-      return of(Actions.removePostSuccess(payload));
+    switchMap(async ({ payload }) => {
+      const id = await DbService.removePost(payload);
+      return id;
     }),
+    switchMap(id => of(Actions.removePostSuccess(id))),
     catchError(() => of(Actions.removePostFailure('remove posts failure'))),
   );
 

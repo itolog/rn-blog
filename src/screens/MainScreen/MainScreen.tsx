@@ -17,11 +17,13 @@ import EmptyPost from '../../shared/components/EmptyPost/EmptyPost';
 // STORE IMPORTS
 import { AppState } from '../../store';
 import { Actions } from '../../store/post/actions';
-import { getAllPosts } from '../../store/post/selectors';
+import { getAllPosts, isPostLoading } from '../../store/post/selectors';
+import Loader from '../../shared/UI/Loader/Loader';
 // STORE PROPS
 const mapStateToProps = (state: AppState) => {
   return {
     allPosts: getAllPosts(state),
+    isLoading: isPostLoading(state),
   };
 };
 
@@ -37,7 +39,7 @@ type Props = ReturnType<typeof mapDispatchToProps> &
   ReturnType<typeof mapStateToProps> &
   IProps;
 
-const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
+const MainScreen = ({ navigation, loadPosts, allPosts, isLoading }: Props) => {
   const handleOpenPost = (post: DataDB) => {
     navigation.navigate('Post', {
       postId: post.id,
@@ -48,7 +50,9 @@ const MainScreen = ({ navigation, loadPosts, allPosts }: Props) => {
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [loadPosts]);
+
+  if (isLoading) return <Loader />;
 
   if (allPosts.length === 0) {
     return <EmptyPost title='Постов нету' />;
@@ -82,4 +86,7 @@ MainScreen.navigationOptions = ({ navigation }: Props) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MainScreen);

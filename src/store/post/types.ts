@@ -1,7 +1,8 @@
-import { Data } from '../../shared/interfaces/data';
+import { DataDB } from '../../shared/interfaces/data';
 
 export interface PostState {
-  allPosts: Data[];
-  bookedPosts: Data[];
+  allPosts: DataDB[];
+  bookedPosts: DataDB[];
   error: string | null;
+  loading: boolean;
 }

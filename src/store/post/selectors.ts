@@ -13,6 +13,11 @@ export const getBookedPosts = createSelector(
   state => state.bookedPosts,
 );
 
+export const isPostLoading = createSelector(
+  getPostsState,
+  state => state.loading,
+);
+
 export const getPostsError = createSelector(
   getPostsState,
   state => state.error,

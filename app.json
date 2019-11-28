@@ -1,13 +1,12 @@
 {
   "expo": {
-    "name": " yo_blog",
-    "slug": "blog",
+    "name": "yo_blog",
+    "slug": "blog-yo-common",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +23,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.itologjs.yo-blog",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.itologjs.yo_blog",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE"
+      ]
     }
   }
 }

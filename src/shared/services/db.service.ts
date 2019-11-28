@@ -1,12 +1,12 @@
 import * as SQLite from 'expo-sqlite';
 
-import { DTOProps } from '../interfaces/data';
+import { DataDB, DTOProps } from '../interfaces/data';
 
 const db = SQLite.openDatabase('post.db');
 
 class DbService {
   static init() {
-    db.transaction((tx: any) => {
+    db.transaction((tx: SQLTransaction) => {
       tx.executeSql(
         'create table if not exists posts (id integer primary key not null, img text not null, text text not null,date text,booked int);)',
         [],
@@ -15,13 +15,14 @@ class DbService {
         },
         (_: SQLTransaction, error: SQLError) => {
           console.log('db error', error);
+          return false;
         },
       );
     });
   }
 
   static dropPosts() {
-    db.transaction((tx: any) => {
+    db.transaction((tx: SQLTransaction) => {
       tx.executeSql(
         'drop table  posts',
         [],
@@ -30,6 +31,7 @@ class DbService {
         },
         (_: SQLTransaction, error: SQLError) => {
           console.log('db error', error);
+          return false;
         },
       );
     });
@@ -41,9 +43,12 @@ class DbService {
         tx.executeSql(
           'select * from posts',
           [],
-          (_, { rows }) => resolve(rows._array),
           // @ts-ignore
-          (_, error) => reject(error),
+          (_, { rows }) => resolve(rows._array),
+          (_: SQLTransaction, error: SQLError) => {
+            reject(error);
+            return false;
+          },
         );
       });
     });
@@ -51,16 +56,50 @@ class DbService {
 
   static createPost({ text, date, booked, img }: DTOProps) {
     return new Promise((resolve, reject) => {
-      db.transaction(tx => {
+      db.transaction((tx: SQLTransaction) => {
         tx.executeSql(
           'insert into posts(text, date, booked, img) values(?, ?, ?, ?)',
           [text, date, booked, img],
-          (_, result) => resolve(result.insertId),
-          // @ts-ignore
-          (_, error) => reject(error),
+          (_: SQLTransaction, result: SQLResultSet) => resolve(result.insertId),
+          (_: SQLTransaction, error: SQLError) => {
+            reject(error);
+            return false;
+          },
         );
       });
     });
+  }
+
+  static updatePostBooked(post: DataDB) {
+    return new Promise((resolve, reject) => {
+      db.transaction((tx: SQLTransaction) => {
+        tx.executeSql(
+          'UPDATE posts SET booked = ? WHERE id = ?',
+          [post.booked ? 0 : 1, post.id],
+          () => resolve(post.id),
+          (_: SQLTransaction, error: SQLError) => {
+            reject(error);
+            return false;
+          },
+        );
+      });
+    });
+  }
+
+  static removePost(id: number) {
+    return new Promise((resolve, reject) => {
+      db.transaction((tx: SQLTransaction) => {
+        tx.executeSql(
+          'DELETE FROM posts WHERE id = ?',
+          [id],
+          () => resolve(id),
+          (_: SQLTransaction, error: SQLError) => {
+            reject(error)
+            return false;
+          },
+        );
+      });
+    })
   }
 }
 
